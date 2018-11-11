@@ -63,7 +63,11 @@ a {
   margin-right: auto;
 }
 .comment {
-  border: solid 1px #e0e0e0 !important;
+  border-bottom: solid 1px #e0e0e0 !important;
+  margin-bottom: 15px;
+}
+.comment strong {
+  float: right;
 }
 .mt {
   margin-top: 15px;

@@ -41,7 +41,9 @@ const RootQuery = new GraphQLObjectType({
       args: {id: {type: GraphQLID}},
       resolve(parent, args) {
 
-        return Post.findById(args.id);
+        const bottle = Post.findById(args.id);
+        console.log(bottle);
+        return bottle;
       }
     },
     posts: {
@@ -72,7 +74,7 @@ const Mutation = new GraphQLObjectType({
         date: {type: GraphQLString}
       },
       resolve(parent, args) {
-        console.log(args);
+
         let post = new Post({username: args.username, title: args.title, body: args.body, date: args.date, comments: []});
         return post.save();
       }
@@ -85,7 +87,6 @@ const Mutation = new GraphQLObjectType({
         comment: {type: GraphQLString}
       },
       resolve(parent, args) {
-        console.log('oashenfoiwshfeohwfo');
        return Post.findByIdAndUpdate(args.id, {$push: {comments: {username: args.username, comment: args.comment}}}, {new: true});
       }
     },
