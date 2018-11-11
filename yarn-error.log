@@ -1,0 +1,51 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
+
+PATH: 
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Essential\ADB\;C:\Users\Marc\AppData\Local\Microsoft\WindowsApps;C:\Users\Marc\AppData\Local\GitHubDesktop\bin;C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Marc\AppData\Local\Yarn\bin;C:\Users\Marc\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Users\Marc\AppData\Local\atom\bin;C:\Users\Marc\AppData\Local\hyper\app-2.0.0\resources\bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  8.12.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\Marc\Documents\GitHub\graphforums\package.json: Unexpected token } in JSON at position 415
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1136:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
+      at <anonymous>
+
+npm manifest: 
+  {
+    "name": "graphforums",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^6.1.0",
+      "express": "^4.16.4",
+      "express-graphql": "^0.7.1",
+      "graphql": "^14.0.2",
+      "lodash": "^4.17.11",
+      "mongodb": "^3.1.9",
+      "mongoose": "^5.3.10",
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
