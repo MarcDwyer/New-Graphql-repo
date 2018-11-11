@@ -35,8 +35,26 @@ const Poster = (props) => (
       {({ loading, error, data }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
-        console.log('qdwqdwqwdqdw');
-          return (<span>{data.title}</span>);
+        console.log(data);
+        const {title, body, comments} = data.post;
+          return (
+            <div className="topmodal">
+              <div className="modaldiv">
+                <div className="modalcontent">
+                  <div className="content">
+                  <h2>{title}</h2>
+                  <div className="divider"></div>
+                  <p>{body}</p>
+                  <div className="divider"></div>
+                  <h5>Comments <small>{comments.length}</small></h5>
+                  {comments.map(({username, comment}) => (
+                      <span className="comment">{comment} <strong>Created by {username}</strong></span>
+                  ))}
+                  </div>
+                  </div>
+                </div>
+              </div>
+          );
 
       }}
     </Query>
