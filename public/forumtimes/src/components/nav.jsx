@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem, Dropdown, Button } from 'react-materialize';
+import { NavItem, Dropdown, Button } from 'react-materialize';
 import {AuthContext} from './authprovider';
 import { Link } from 'react-router-dom';
 class Nav extends Component {

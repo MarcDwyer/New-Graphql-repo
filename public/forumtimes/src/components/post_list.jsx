@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './nav';
 import { graphql, compose } from 'react-apollo';
-import {Collection, CollectionItem, Button } from 'react-materialize';
+import {Collection, CollectionItem } from 'react-materialize';
 import { getPosts } from '../queries/queries';
 import { Route, Link } from 'react-router-dom';
 

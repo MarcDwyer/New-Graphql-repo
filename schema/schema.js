@@ -1,6 +1,10 @@
-const graphql = require('graphql');
+const {graphql} = require('graphql');
 const Post = require('../models/posts');
 const User = require('../models/user-model');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
+
+const _ = require("lodash");
 
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList, GraphQLNonNull } = graphql;
 
@@ -13,8 +17,14 @@ const PostType = new GraphQLObjectType({
     title: {type: GraphQLString},
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
-    date: {type: GraphQLString}
-    })
+    date: {type: GraphQLString},
+    commentLength: {
+      type: GraphQLInt,
+      resolve(parent, args) {
+        console.log('pee')
+      }
+    }
+})
 });
 
 const CommentType = new GraphQLObjectType({
@@ -40,9 +50,7 @@ const RootQuery = new GraphQLObjectType({
       type: PostType,
       args: {id: {type: GraphQLID}},
       resolve(parent, args) {
-
         const bottle = Post.findById(args.id);
-        console.log(bottle);
         return bottle;
       }
     },
@@ -59,6 +67,7 @@ const RootQuery = new GraphQLObjectType({
         return req.user;
       }
     }
+
   }
 });
 

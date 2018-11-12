@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Input } from 'react-materialize';
-import { graphql, compose, Mutation, Query } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import {AuthContext} from './authprovider';
-import {getPosts} from '../queries/queries';
+import uuid from 'uuid';
+
 const FullPost = gql`
    query($id: ID!) {
     post(id: $id){
@@ -61,11 +62,13 @@ render() {
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {
                                 e.preventDefault();
+                                const newUser = user ? user.username : 'Anonymous';
                                 addComment({variables: {
                                   id,
-                                  username: user.username,
+                                  username: newUser,
                                   comment: this.state.body
                                 }})
+                                this.setState({body: ''})
                               }}>
                             <Input
                             type="textarea"
@@ -82,7 +85,7 @@ render() {
                         <div className="divider"></div>
                         <h5>Comments <small>{comments.length}</small></h5>
                         {comments.map(({username, comment}) => (
-                            <span className="comment">{comment} <strong>Created by {username}</strong></span>
+                            <span key={uuid()} className="comment">{comment} <strong>Created by {username}</strong></span>
                         ))}
                         </div>
                         </div>
