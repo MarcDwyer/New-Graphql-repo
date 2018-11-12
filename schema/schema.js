@@ -1,10 +1,8 @@
-const {graphql} = require('graphql');
+const { graphql, buildSchema } = require('graphql');
 const Post = require('../models/posts');
 const User = require('../models/user-model');
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
-
-const _ = require("lodash");
+const ObjectId = require('mongoose').Types.ObjectId;
+const _ = require('lodash');
 
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList, GraphQLNonNull } = graphql;
 
@@ -18,8 +16,10 @@ const PostType = new GraphQLObjectType({
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
     date: {type: GraphQLString}
-    })
-});
+})
+})
+
+
 
 const CommentType = new GraphQLObjectType({
   name: 'Comment',
@@ -44,7 +44,9 @@ const RootQuery = new GraphQLObjectType({
       type: PostType,
       args: {id: {type: GraphQLID}},
       resolve(parent, args) {
+
         const bottle = Post.findById(args.id);
+        console.log(bottle);
         return bottle;
       }
     },
@@ -60,8 +62,21 @@ const RootQuery = new GraphQLObjectType({
         if (!req.user) return null;
         return req.user;
       }
+    },
+    getCommentLength: {
+      type: CommentLength,
+      args: {id: {type:GraphQLID}},
+      resolve(parent, args) {
+      return  Post.aggregate([{$match: {_id: ObjectId(args.id)}}, {$project: {comments: {$size: '$comments'}}}], (err, res) => {
+        console.log(res[0].comments);
+        const newObj = {
+          length: res[0].comments
+        }
+        console.log(newObj)
+        return newObj;
+    })
+      }
     }
-
   }
 });
 
