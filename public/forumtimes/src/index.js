@@ -26,9 +26,8 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-
 <ApolloProvider client={client}>
-    <AuthProvider>
+<AuthProvider>
 <BrowserRouter>
 <Switch>
 <Route path='/' component={PostList} />

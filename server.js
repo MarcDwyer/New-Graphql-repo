@@ -49,8 +49,7 @@ app.use('/auth', authRoutes)
 app.use('/graph',
 
  graphQLHTTP(req => ({
-   schema: schema.schema,
-   rootValue: schema.rootValue,
+  schema,
   graphiql: true,
   context: {
     user: req.user

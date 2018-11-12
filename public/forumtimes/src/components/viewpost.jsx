@@ -3,6 +3,7 @@ import { Button, Input } from 'react-materialize';
 import { Mutation, Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import {AuthContext} from './authprovider';
+import { getPosts } from '../queries/queries';
 import uuid from 'uuid';
 
 const FullPost = gql`
@@ -36,6 +37,14 @@ class ViewPost extends Component {
 state ={
   body: ''
 }
+componentDidMount() {
+document.body.addEventListener('keydown', this.handleExit)
+document.body.addEventListener('click', this.handleExit);
+}
+componentWillUnmount() {
+  document.body.removeEventListener('keydown', this.handleExit);
+  document.body.removeEventListener('click', this.handleExit);
+}
 render() {
 
   return (
@@ -43,7 +52,15 @@ render() {
       {(user) => (
         <Query query={FullPost} variables={{id: this.props.match.params.id}}>
             {({ loading, error, data }) => {
-              if (loading) return "Loading...";
+              if (loading) return (
+                <div className="topmodal">
+                  <div className="modaldiv">
+                    <div className="modalcontent">
+                      <h4>Loading Post...</h4>
+                    </div>
+                  </div>
+                </div>
+              );
               if (error) return `Error! ${error.message}`;
               const {title, body, comments, id} = data.post;
 
@@ -58,6 +75,7 @@ render() {
                         <div className="divider"></div>
                         <Mutation
                           mutation={addComment}
+                          refetchQueries={[{query: getPosts}]}
                           >
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {
@@ -73,12 +91,14 @@ render() {
                             <Input
                             type="textarea"
                             name="body"
+                            className="thecomment"
+                            placeholder="What are your thoughts?"
                             value={this.state.body}
                             onChange={(e) => {
                               this.setState({[e.target.name]: e.target.value});
                             }}
                               />
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit" className="mb">Comment</Button>
                             </form>
                           )}
                       </Mutation>
@@ -92,12 +112,22 @@ render() {
                       </div>
                     </div>
                 );
-
             }}
           </Query>
       )}
   </AuthContext.Consumer>
   );
+}
+handleExit = (e) => {
+  if (e.type === 'keydown') {
+  if (e.keyCode === 27) {
+    this.props.history.goBack();
+  }
+} else {
+  if (e.target.classList.value.includes('topmodal')) {
+    this.props.history.goBack();
+  }
+}
 }
 }
 

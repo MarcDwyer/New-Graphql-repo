@@ -25,7 +25,9 @@ a {
 .collection-item {
   border-top: solid 1px #e0e0e0;
 }
-
+.brand-logo {
+  margin-left: 15px;
+}
 .topmodal {
   width: 100%;
   height: 100%;
@@ -71,4 +73,13 @@ a {
 }
 .mt {
   margin-top: 15px;
+}
+.collection-item:hover {
+  background-color: #eee;
+}
+.mb {
+  margin-bottom: 15px;
+}
+.thecomment {
+  border: solid 1px #e0e0e0 !important;
 }
