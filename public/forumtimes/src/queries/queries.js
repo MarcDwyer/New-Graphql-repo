@@ -12,10 +12,12 @@ const fetchUser = gql`
 
 const getPosts = gql`
 {
-  posts{
+ posts{
     id
     title
     username
+    commentLength
+    date
   }
 }
 `;

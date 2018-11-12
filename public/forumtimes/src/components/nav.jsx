@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem, Dropdown, Button } from 'react-materialize';
+import { NavItem, Dropdown, Button } from 'react-materialize';
 import {AuthContext} from './authprovider';
 import { Link } from 'react-router-dom';
 class Nav extends Component {
@@ -17,7 +17,7 @@ class Nav extends Component {
       <React.Fragment>
           <nav>
             <div className="nav-wrapper">
-              <Link to="/" className="brand-logo">The Forums</Link>
+              <Link to="/" className="brand-logo">GraphQL Forums</Link>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                   {this.isUser(user)}
               </ul>

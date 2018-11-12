@@ -1,6 +1,8 @@
 const graphql = require('graphql');
 const Post = require('../models/posts');
 const User = require('../models/user-model');
+const ObjectId = require('mongoose').Types.ObjectId;
+const _ = require('lodash');
 
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList, GraphQLNonNull } = graphql;
 
@@ -13,7 +15,14 @@ const PostType = new GraphQLObjectType({
     title: {type: GraphQLString},
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
-    date: {type: GraphQLString}
+    date: {type: GraphQLString},
+    commentLength: {
+      type: GraphQLString,
+       async resolve(parent, args) {
+      const data = await Post.aggregate([{$match: {_id: ObjectId(parent.id)}}, {$project: {comments: {$size: '$comments'}}}]);
+      return data[0].comments;
+      }
+    }
     })
 });
 
@@ -42,14 +51,15 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
 
         const bottle = Post.findById(args.id);
-        console.log(bottle);
         return bottle;
       }
     },
     posts: {
       type: new GraphQLList(PostType),
-      resolve() {
-        return Post.find({});
+    async  resolve() {
+        const data = await Post.find({}).sort({date: -1});
+        return data;
+
       }
     },
     getUser: {
