@@ -17,14 +17,8 @@ const PostType = new GraphQLObjectType({
     title: {type: GraphQLString},
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
-    date: {type: GraphQLString},
-    commentLength: {
-      type: GraphQLInt,
-      resolve(parent, args) {
-        console.log('pee')
-      }
-    }
-})
+    date: {type: GraphQLString}
+    })
 });
 
 const CommentType = new GraphQLObjectType({
