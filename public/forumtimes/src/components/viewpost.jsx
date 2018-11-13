@@ -111,6 +111,7 @@ handleExit = (e) => {
 }
 }
 deletePost(user, username, id) {
+  if (!user) return;
   if (user.username === username) {
     return (
       <Mutation mutation={RemovePost} refetchQueries={[{query: getPosts}]}>
