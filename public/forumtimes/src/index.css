@@ -83,3 +83,7 @@ a {
 .thecomment {
   border: solid 1px #e0e0e0 !important;
 }
+.delete {
+  color: red;
+  cursor: pointer;
+}

@@ -1,36 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Input } from 'react-materialize';
 import { Mutation, Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
 import {AuthContext} from './authprovider';
-import { getPosts } from '../queries/queries';
+import { getPosts, FullPost, addComment, RemovePost } from '../queries/queries';
 import uuid from 'uuid';
-
-const FullPost = gql`
-   query($id: ID!) {
-    post(id: $id){
-      id
-      title
-      body
-      comments {
-        username
-        comment
-      }
-    }
-  }
-`;
-
-const addComment = gql`
-  mutation($id: ID!, $username: String!, $comment: String!) {
-    addComment(id: $id, username: $username, comment: $comment){
-      id
-      comments {
-        username
-        comment
-      }
-    }
-  }
-`;
 
 
 class ViewPost extends Component {
@@ -46,7 +19,6 @@ componentWillUnmount() {
   document.body.removeEventListener('click', this.handleExit);
 }
 render() {
-
   return (
     <AuthContext.Consumer>
       {(user) => (
@@ -62,7 +34,7 @@ render() {
                 </div>
               );
               if (error) return `Error! ${error.message}`;
-              const {title, body, comments, id} = data.post;
+              const {title, body, comments, id, username} = data.post;
 
                 return (
                   <div className="topmodal">
@@ -70,6 +42,7 @@ render() {
                       <div className="modalcontent">
                         <div className="content">
                         <h2>{title}</h2>
+                        {this.deletePost(user, username, id)}
                         <div className="divider"></div>
                         <p>{body}</p>
                         <div className="divider"></div>
@@ -128,6 +101,26 @@ handleExit = (e) => {
     this.props.history.goBack();
   }
 }
+}
+deletePost(user, username, id) {
+  if (user.username === username) {
+    return (
+      <Mutation mutation={RemovePost} refetchQueries={[{query: getPosts}]}>
+        {(removePost, { loading, error }) => (
+          <span
+            className="delete"
+            onClick={async () => {
+            await removePost({variables: {id}});
+            this.props.history.goBack();
+            }
+          }
+            >
+            <strong>Delete Post</strong>
+          </span>
+        )}
+      </Mutation>
+    );
+  }
 }
 }
 

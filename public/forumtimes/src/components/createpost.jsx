@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { graphql, compose} from 'react-apollo';
 import { addPost, getPosts } from '../queries/queries';
 import { Button } from 'react-materialize';
-import Nav from './nav';
 
 import {AuthContext} from './authprovider';
 

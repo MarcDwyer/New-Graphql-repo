@@ -15,6 +15,7 @@ class Nav extends Component {
   <AuthContext.Consumer>
     {(user) => (
       <React.Fragment>
+        <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper">
               <Link to="/" className="brand-logo">GraphQL Forums</Link>
@@ -23,6 +24,7 @@ class Nav extends Component {
               </ul>
             </div>
           </nav>
+          </div>
       </React.Fragment>
     )}
 </AuthContext.Consumer>

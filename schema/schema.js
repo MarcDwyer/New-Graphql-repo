@@ -100,6 +100,17 @@ const Mutation = new GraphQLObjectType({
        return Post.findByIdAndUpdate(args.id, {$push: {comments: {username: args.username, comment: args.comment}}}, {new: true});
       }
     },
+    removePost: {
+      type: PostType,
+      args: {
+        id: {type: GraphQLID}
+      },
+      async resolve(parent, args) {
+        console.log(args.id);
+      const data = await Post.remove({_id: ObjectId(args.id)});
+      console.log(data);
+      }
+    }
   }
 })
 

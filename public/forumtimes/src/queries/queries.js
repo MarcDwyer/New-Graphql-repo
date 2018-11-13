@@ -31,6 +31,39 @@ mutation($title: String!, $body: String!, $username: String, $date: String) {
 }
 `;
 
+const FullPost = gql`
+   query($id: ID!) {
+    post(id: $id){
+      id
+      title
+      body
+      username
+      comments {
+        username
+        comment
+      }
+    }
+  }
+`;
 
+const addComment = gql`
+  mutation($id: ID!, $username: String!, $comment: String!) {
+    addComment(id: $id, username: $username, comment: $comment){
+      id
+      comments {
+        username
+        comment
+      }
+    }
+  }
+`;
 
-export { getPosts, addPost, fetchUser };
+const RemovePost = gql`
+mutation($id: ID!) {
+  removePost(id: $id){
+    title
+  }
+}
+`;
+
+export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost };
