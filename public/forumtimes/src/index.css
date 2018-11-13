@@ -1,3 +1,9 @@
+:root {
+  --twitchbgcolor: #19171c;
+  --twitchnavcolor: #4b367c;
+  --ognavcolor: #38435a;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -14,7 +20,7 @@ code {
 }
 
 nav {
-  background-color: #38435a !important;
+  background-color: var(--ognavcolor) !important;
 }
 
 a {
@@ -86,4 +92,5 @@ a {
 .delete {
   color: red;
   cursor: pointer;
+  margin-bottom: 15px;
 }

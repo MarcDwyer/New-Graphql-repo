@@ -36,7 +36,7 @@ isUser(user) {
       <Dropdown trigger={
           <Button style={this.styles.button}>Sign In</Button>
         }>
-        <NavItem href="/auth/google">Google+</NavItem>
+        <NavItem href="http://localhost:5000/auth/google">Google+</NavItem>
       </Dropdown>
 
     );
@@ -45,7 +45,7 @@ isUser(user) {
     <Dropdown trigger={
         <Button style={this.styles.button}>{user.username}</Button>
       }>
-      <NavItem href="/auth/logout">Sign Out</NavItem>
+      <NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>
     </Dropdown>
   )
 }

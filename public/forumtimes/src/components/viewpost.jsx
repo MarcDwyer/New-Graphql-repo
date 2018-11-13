@@ -19,6 +19,7 @@ componentWillUnmount() {
   document.body.removeEventListener('click', this.handleExit);
 }
 render() {
+
   return (
     <AuthContext.Consumer>
       {(user) => (
@@ -42,13 +43,20 @@ render() {
                       <div className="modalcontent">
                         <div className="content">
                         <h2>{title}</h2>
-                        {this.deletePost(user, username, id)}
                         <div className="divider"></div>
                         <p>{body}</p>
+                        {this.deletePost(user, username, id)}
                         <div className="divider"></div>
                         <Mutation
                           mutation={addComment}
-                          refetchQueries={[{query: getPosts}]}
+                          update={(cache, { data: { addComment } }) => {
+                            const { posts } = cache.readQuery({ query: getPosts });
+                            cache.writeQuery({
+                              query: getPosts,
+                              data: { posts: posts.concat([addComment])}
+                            });
+                          }
+                          }
                           >
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {

@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import {Collection, CollectionItem } from 'react-materialize';
 import { getPosts } from '../queries/queries';
 import { Route, Link } from 'react-router-dom';
+import uuid from 'uuid';
 
 import ViewPost from './viewpost';
 import CreatePost from './createpost';
@@ -27,7 +28,7 @@ render() {
               {data.posts.map(({ title, username, commentLength, id }) => {
               const path = `/posts/${id}`;
               return (
-              <Link to={path} key={id}>
+              <Link to={path} key={uuid()}>
               <CollectionItem>
               <strong>{title}</strong> <br/>
                 <span>Created by <strong>{username}</strong></span> <br />

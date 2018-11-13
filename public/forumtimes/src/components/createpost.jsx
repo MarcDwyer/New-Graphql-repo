@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { graphql, compose} from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import { addPost, getPosts } from '../queries/queries';
 import { Button } from 'react-materialize';
 
@@ -26,7 +26,31 @@ class CreatePost extends Component {
                 <div>
                 <h4>Create a Post</h4>
                 <div className="row">
-                <form className="col s12" onSubmit={(e) => this.handleSubmit(e, user)}>
+                  <Mutation
+                    mutation={addPost}
+                    update={(cache, { data: { addPost } }) => {
+                            const { posts } = cache.readQuery({ query: getPosts });
+                            console.log(addPost)
+                            cache.writeQuery({
+                              query: getPosts,
+                              data: { posts: [addPost, ...posts]}
+                            });
+                          }}
+                    >
+                  {(addComment, { data }) => (
+                <form className="col s12" onSubmit={(e) => {
+                    e.preventDefault();
+                    const newUser = user ? user.username : 'Anonymous';
+                    addComment({variables: {
+                      title: this.state.title,
+                      body: this.state.body,
+                      username: newUser,
+                      date: new Date(),
+                      comments: []
+                    }})
+                    this.props.history.goBack();
+                  }
+                  }>
                     <label>Title
                     <input name='title' type="text" value={this.state.title} onChange={this.handleChange}/>
                     </label>
@@ -36,6 +60,8 @@ class CreatePost extends Component {
                   <Button type="submit">Submit</Button>
                     <Link className="waves-effect waves-light btn red lighten-1 ml-1" to="/">Cancel</Link>
                 </form>
+              )}
+                </Mutation>
                 </div>
               </div>
               );
@@ -47,7 +73,6 @@ class CreatePost extends Component {
 );
   }
   handleSubmit = (e, user) => {
-    console.log({e, user});
     e.preventDefault();
     const newUser = user ? user.username : 'Anonymous';
     this.props.addPost({
@@ -70,6 +95,4 @@ class CreatePost extends Component {
   }
 }
 
-export default compose(
-  graphql(addPost, {name: "addPost"}),
-)(CreatePost);
+export default CreatePost;

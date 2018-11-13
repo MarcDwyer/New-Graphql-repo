@@ -17,7 +17,6 @@ const getPosts = gql`
     title
     username
     commentLength
-    date
   }
 }
 `;
@@ -25,8 +24,10 @@ const getPosts = gql`
 const addPost = gql`
 mutation($title: String!, $body: String!, $username: String, $date: String) {
   addPost(title: $title, body: $body, username: $username, date: $date) {
+    id
     title
-    body
+    username
+    commentLength
   }
 }
 `;
@@ -50,6 +51,7 @@ const addComment = gql`
   mutation($id: ID!, $username: String!, $comment: String!) {
     addComment(id: $id, username: $username, comment: $comment){
       id
+      commentLength
       comments {
         username
         comment

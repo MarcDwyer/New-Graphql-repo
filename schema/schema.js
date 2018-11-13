@@ -83,10 +83,11 @@ const Mutation = new GraphQLObjectType({
         body: {type: new GraphQLNonNull(GraphQLString)},
         date: {type: GraphQLString}
       },
-      resolve(parent, args) {
-
+      async resolve(parent, args) {
         let post = new Post({username: args.username, title: args.title, body: args.body, date: args.date, comments: []});
-        return post.save();
+        const data = await post.save();
+        data.commentLength = 0;
+        return data;
       }
     },
     addComment: {
