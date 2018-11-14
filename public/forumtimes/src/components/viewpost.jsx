@@ -124,7 +124,7 @@ deletePost(user, username, id) {
             }
           }
             >
-            <strong>Delete Post</strong>
+            <strong className="deletecomment">Delete Post</strong>
           </span>
         )}
       </Mutation>

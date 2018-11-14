@@ -4,7 +4,15 @@ body {
 }
 
 nav {
+  position: sticky;
+  top: 0;
   background-color: #38435a !important;
+  z-index: 2000;
+}
+.nav-flex {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -73,17 +81,22 @@ a {
 .thecomment {
   border: solid 1px #e0e0e0 !important;
 }
-.move {
-  margin-left: 10px;
+.signbut {
+  position: absolute;
+  right: 0;
+  top: 25%  ;
+}
+.deletecomment {
+  color: red;
+  cursor: pointer;
 }
 @media (max-width: 600px) {
-  .signin {
-    color: black;
-    background-color: transparent;
-    width: 100%;
-    box-shadow: none !important;
-  }
-  .dropdown-content {
-    box-shadow: none !important;
-  }
+.signbut {
+  top: 20%;
+}
+}
+@media (max-width: 340px) {
+.signbut {
+  display: none;
+}
 }
