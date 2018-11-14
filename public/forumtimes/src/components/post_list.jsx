@@ -8,6 +8,8 @@ import uuid from 'uuid';
 
 import ViewPost from './viewpost';
 import CreatePost from './createpost';
+
+
 class PostList extends Component {
 render() {
   return(

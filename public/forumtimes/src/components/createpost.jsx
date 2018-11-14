@@ -30,7 +30,6 @@ class CreatePost extends Component {
                     mutation={addPost}
                     update={(cache, { data: { addPost } }) => {
                             const { posts } = cache.readQuery({ query: getPosts });
-                            console.log(addPost)
                             cache.writeQuery({
                               query: getPosts,
                               data: { posts: [addPost, ...posts]}
@@ -71,24 +70,6 @@ class CreatePost extends Component {
     </div>
     </div>
 );
-  }
-  handleSubmit = (e, user) => {
-    e.preventDefault();
-    const newUser = user ? user.username : 'Anonymous';
-    this.props.addPost({
-      variables: {
-        title: this.state.title,
-        body: this.state.body,
-        username: newUser,
-        date: new Date()
-      },
-      refetchQueries: [{ query: getPosts}]
-    })
-    this.setState({
-      title: '',
-      body: ''
-    });
-    this.props.history.push('/');
   }
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
