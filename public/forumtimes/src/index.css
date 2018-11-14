@@ -2,7 +2,11 @@ body {
   margin: 0;
   padding: 0;
 }
-
+.contained {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
 nav {
   position: sticky;
   top: 0;
@@ -65,9 +69,6 @@ a {
   border-bottom: solid 1px #e0e0e0 !important;
   margin-bottom: 15px;
 }
-.comment strong {
-  float: right;
-}
 .mt {
   margin-top: 15px;
 }
@@ -78,16 +79,36 @@ a {
   margin-bottom: 15px;
 }
 .thecomment {
+  display: flex;
   border: solid 1px #e0e0e0 !important;
+  margin-bottom: 15px;
+}
+.inputdiv {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 98% !important;
+  margin-bottom: 0 !important;
 }
 .signbut {
   position: absolute;
   right: 0;
   top: 25%  ;
 }
+.smallertext {
+  color: rgb(0, 128, 128);
+  font-size: 13px;
+}
 .deletecomment {
   color: red;
   cursor: pointer;
+}
+.commentsdiv {
+  width: 100%;
+}
+.commentdiv {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
 }
 @media (max-width: 600px) {
 .signbut {

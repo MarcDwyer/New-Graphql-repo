@@ -21,7 +21,7 @@ export const PostList = (props) => {
             <Nav />
               <Route path={`/posts/:id`} component={ViewPost} />
               <Route path='/create-post' component={CreatePost}/>
-          <div className="container">
+          <div className="contained">
             <h3>Recent Posts</h3>
             <Link className='waves-effect waves-light btn' to='/create-post'>Create Post</Link>
             <div className="comments">

@@ -43,7 +43,7 @@ render() {
                     <div className="modaldiv">
                       <div className="modalcontent">
                         <div className="content">
-                        <h2>{title}</h2>
+                        <h4>{title}</h4>
                         <div className="divider"></div>
                         <p>{body}</p>
                       {this.deletePost(signedId, googleId, id)}
@@ -62,25 +62,34 @@ render() {
                                 }})
                                 this.setState({body: ''})
                               }}>
-                            <Input
+                              <div className="thecomment">
+                            <textarea
                             type="textarea"
                             name="body"
-                            className="thecomment"
+                            id="textarea1"
+                            className="inputdiv materialize-textarea"
                             placeholder="What are your thoughts?"
                             value={this.state.body}
                             onChange={(e) => {
                               this.setState({[e.target.name]: e.target.value});
                             }}
                               />
+                              <label for="textarea1"></label>
+                              </div>
                             <Button type="submit" className="mb">Comment</Button>
                             </form>
                           )}
                       </Mutation>
                         <div className="divider"></div>
                         <h5>Comments <small>{comments.length}</small></h5>
+                        <div className="commentsdiv">
                         {comments.map(({username, comment}) => (
-                            <span key={uuid()} className="comment">{comment} <strong>Created by {username}</strong></span>
+                          <div className="commentdiv">
+                            <span className="smallertext"><strong>Created by {username}</strong></span>
+                            <p key={uuid()} className="comment">{comment}</p>
+                            </div>
                         ))}
+                        </div>
                         </div>
                         </div>
                       </div>
