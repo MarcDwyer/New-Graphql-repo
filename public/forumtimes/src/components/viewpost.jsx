@@ -50,14 +50,6 @@ render() {
                         <div className="divider"></div>
                         <Mutation
                           mutation={addComment}
-                          update={(cache, { data: { addComment } }) => {
-                            const { posts } = cache.readQuery({ query: getPosts });
-                            cache.writeQuery({
-                              query: getPosts,
-                              data: { posts: posts.concat([addComment])}
-                            });
-                          }
-                          }
                           >
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {

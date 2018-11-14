@@ -7,7 +7,7 @@ import { Route, Link } from 'react-router-dom';
 import uuid from 'uuid';
 
 import ViewPost from './viewpost';
-import CreatePost from './createpost';
+import { CreatePost } from './createpost';
 
 
 export const PostList = (props) => {
