@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Nav from './nav';
 import { Query } from 'react-apollo';
 import {Collection, CollectionItem } from 'react-materialize';
@@ -10,8 +10,7 @@ import ViewPost from './viewpost';
 import CreatePost from './createpost';
 
 
-class PostList extends Component {
-render() {
+export const PostList = (props) => {
   return(
   <Query query={getPosts}>
       {({ loading, error, data }) => {
@@ -48,6 +47,3 @@ render() {
     </Query>
   );
 }
-}
-
-export default PostList;

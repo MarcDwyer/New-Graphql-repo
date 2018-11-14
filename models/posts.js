@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   username: String,
-  userid: String,
+  googleId: String,
   title: String,
   body: String,
   comments: Array,

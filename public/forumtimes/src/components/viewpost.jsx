@@ -35,7 +35,8 @@ render() {
                 </div>
               );
               if (error) return `Error! ${error.message}`;
-              const {title, body, comments, id, username} = data.post;
+              const {title, body, comments, id, googleId} = data.post;
+              const signedId = user ? user.googleId : null;
 
                 return (
                   <div className="topmodal">
@@ -45,7 +46,7 @@ render() {
                         <h2>{title}</h2>
                         <div className="divider"></div>
                         <p>{body}</p>
-                        {this.deletePost(user, username, id)}
+                      {this.deletePost(signedId, googleId, id)}
                         <div className="divider"></div>
                         <Mutation
                           mutation={addComment}
@@ -110,9 +111,9 @@ handleExit = (e) => {
   }
 }
 }
-deletePost(user, username, id) {
-  if (!user) return;
-  if (user.username === username) {
+deletePost(signedId, postId, id) {
+  if (!signedId) return;
+  if (signedId === postId) {
     return (
       <Mutation mutation={RemovePost} refetchQueries={[{query: getPosts}]}>
         {(removePost, { loading, error }) => (

@@ -16,6 +16,7 @@ const PostType = new GraphQLObjectType({
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
     date: {type: GraphQLString},
+    googleId: {type: GraphQLID},
     commentLength: {
       type: GraphQLString,
        async resolve(parent, args) {
@@ -81,10 +82,11 @@ const Mutation = new GraphQLObjectType({
         username: {type: GraphQLString},
         title: {type: new GraphQLNonNull(GraphQLString)},
         body: {type: new GraphQLNonNull(GraphQLString)},
+        googleId: {type: GraphQLID},
         date: {type: GraphQLString}
       },
       async resolve(parent, args) {
-        let post = new Post({username: args.username, title: args.title, body: args.body, date: args.date, comments: []});
+        let post = new Post({username: args.username, googleId: args.googleId, title: args.title, body: args.body, date: args.date, comments: []});
         const data = await post.save();
         data.commentLength = 0;
         return data;
@@ -107,9 +109,7 @@ const Mutation = new GraphQLObjectType({
         id: {type: GraphQLID}
       },
       async resolve(parent, args) {
-        console.log(args.id);
       const data = await Post.remove({_id: ObjectId(args.id)});
-      console.log(data);
       }
     }
   }

@@ -9,7 +9,7 @@ import { createHttpLink } from "apollo-link-http";
 
 
 import './index.css';
-import PostList from './components/post_list';
+import { PostList } from './components/post_list';
 import AuthProvider from './components/authprovider';
 
 const cache = new InMemoryCache();

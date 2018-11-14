@@ -22,8 +22,8 @@ const getPosts = gql`
 `;
 
 const addPost = gql`
-mutation($title: String!, $body: String!, $username: String, $date: String) {
-  addPost(title: $title, body: $body, username: $username, date: $date) {
+mutation($title: String!, $body: String!, $username: String, $googleId: ID, $date: String) {
+  addPost(title: $title, body: $body, username: $username, googleId: $googleId, date: $date) {
     id
     title
     username
@@ -39,6 +39,7 @@ const FullPost = gql`
       title
       body
       username
+      googleId
       comments {
         username
         comment

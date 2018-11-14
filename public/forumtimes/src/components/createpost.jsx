@@ -40,10 +40,13 @@ class CreatePost extends Component {
                 <form className="col s12" onSubmit={(e) => {
                     e.preventDefault();
                     const newUser = user ? user.username : 'Anonymous';
+                    const googleId = user? user.googleId : undefined;
+
                     addComment({variables: {
                       title: this.state.title,
                       body: this.state.body,
                       username: newUser,
+                      googleId: googleId,
                       date: new Date(),
                       comments: []
                     }})
