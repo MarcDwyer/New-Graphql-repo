@@ -13,6 +13,7 @@ const validationSchema  = Yup.object().shape({
 });
 
 const TheForm = (props) => {
+  console.log(props);
   return (
     <Mutation 
     mutation={addPost}
