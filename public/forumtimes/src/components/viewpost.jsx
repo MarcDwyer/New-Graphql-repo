@@ -41,8 +41,8 @@ render() {
                 return (
                   <div className="topmodal">
                     <div className="modaldiv">
-                      <div className="modalcontent">
-                        <div className="content">
+
+                        <div className="content1">
                         <h4>{title}</h4>
                         <div className="divider"></div>
                         <p>{body}</p>
@@ -74,7 +74,7 @@ render() {
                               this.setState({[e.target.name]: e.target.value});
                             }}
                               />
-                              <label for="textarea1"></label>
+                              <label htmlFor="textarea1"></label>
                               </div>
                             <Button type="submit" className="mb">Comment</Button>
                             </form>
@@ -84,12 +84,11 @@ render() {
                         <h5>Comments <small>{comments.length}</small></h5>
                         <div className="commentsdiv">
                         {comments.map(({username, comment}) => (
-                          <div className="commentdiv">
+                          <div key={uuid()} className="commentdiv">
                             <span className="smallertext"><strong>Created by {username}</strong></span>
-                            <p key={uuid()} className="comment">{comment}</p>
+                            <p className="comment">{comment}</p>
                             </div>
                         ))}
-                        </div>
                         </div>
                         </div>
                       </div>
