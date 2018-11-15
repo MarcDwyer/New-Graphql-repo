@@ -17,7 +17,6 @@ class Nav extends Component {
   <AuthContext.Consumer>
     {(user) => (
       <div className="navbar-fixed">
-
         <nav className="fixer">
           <div className="nav-flex">
           <Link to="/" className="brand-logo left">Forum App</Link>

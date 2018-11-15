@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input } from 'react-materialize';
+import { Button } from 'react-materialize';
 import { Mutation, Query } from 'react-apollo';
 import {AuthContext} from './authprovider';
 import { getPosts, FullPost, addComment, RemovePost } from '../queries/queries';
@@ -35,7 +35,7 @@ render() {
                 </div>
               );
               if (error) return `Error! ${error.message}`;
-              const {title, body, comments, id, googleId} = data.post;
+              const {title, body, comments, id, googleId, username } = data.post;
               const signedId = user ? user.googleId : null;
 
                 return (
@@ -44,8 +44,11 @@ render() {
 
                         <div className="content1">
                         <h4>{title}</h4>
+                        <span className="smallertext">Posted by {username}</span>
                         <div className="divider"></div>
+                        <div className="bodytext">
                         <p>{body}</p>
+                        </div>
                       {this.deletePost(signedId, googleId, id)}
                         <div className="divider"></div>
                         <Mutation
