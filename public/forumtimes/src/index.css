@@ -112,14 +112,9 @@ a {
 .modaldiv {
   margin-top: 0;
   width: 100%;
-  height: 100%;
+  max-height: calc(100% - 50px);
 }
-.modaldiv {
-  height: 100%;
-}
-.content {
 
-}
 }
 @media (max-width: 340px) {
 .signbut {
