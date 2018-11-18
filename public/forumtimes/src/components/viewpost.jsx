@@ -25,7 +25,6 @@ render() {
       {(user) => (
         <Query query={FullPost} variables={{id: this.props.match.params.id}}>
             {({ loading, error, data }) => {
-              console.log(this.props.match.params.id)
               if (loading) return (
                 <div className="topmodal">
                   <div className="modaldiv">
@@ -48,7 +47,7 @@ render() {
                         <span className="smallertext">Posted by {username}</span>
                         <div className="divider"></div>
                         <div className="bodytext">
-                        <p>{body}</p>
+                        <p className="thebody">{body}</p>
                         </div>
                       {this.deletePost(signedId, googleId, id)}
                         <div className="divider"></div>
