@@ -57,7 +57,7 @@ const RootQuery = new GraphQLObjectType({
     },
     posts: {
       type: new GraphQLList(PostType),
-    async  resolve() {
+    async resolve() {
         const data = await Post.find({}).sort({date: -1});
         return data;
 
@@ -68,6 +68,14 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args, req) {
         if (!req.user) return null;
         return req.user;
+      }
+    },
+    userPost: {
+      type: new GraphQLList(PostType),
+      args: {id: {type: GraphQLID}},
+      async resolve(parent, args) {
+        const data = await Post.find({googleId: args.id}).sort({date: -1});
+        return data;
       }
     }
   }

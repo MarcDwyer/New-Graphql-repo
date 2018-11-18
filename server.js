@@ -25,15 +25,15 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// enable cors
+const hosts = 'https://forumsite1234.herokuapp.com/' || 'http://localhost:3000';
 var corsOptions = {
-  origin: '<insert uri of front-end domain>',
-  credentials: true // <-- REQUIRED backend setting
+  origin: hosts,
+  credentials: true
 };
 app.use(cors(corsOptions));
 
 
-app.get('/login', (req, res) => {
+app.get('/login', cors(), (req, res) => {
     if (!req.user) return;
 
     const obj = {
@@ -46,8 +46,7 @@ app.get('/login', (req, res) => {
 
 app.use('/auth', authRoutes)
 
-app.use('/graph',
-
+app.use('/graph', cors(),
  graphQLHTTP(req => ({
   schema,
   graphiql: true,

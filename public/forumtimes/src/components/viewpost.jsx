@@ -25,6 +25,7 @@ render() {
       {(user) => (
         <Query query={FullPost} variables={{id: this.props.match.params.id}}>
             {({ loading, error, data }) => {
+              console.log(this.props.match.params.id)
               if (loading) return (
                 <div className="topmodal">
                   <div className="modaldiv">

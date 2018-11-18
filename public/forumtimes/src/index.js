@@ -11,6 +11,7 @@ import { createHttpLink } from "apollo-link-http";
 import './index.css';
 import { PostList } from './components/post_list';
 import AuthProvider from './components/authprovider';
+import { UserPosts } from './components/user-posts';
 
 const cache = new InMemoryCache();
 
@@ -30,6 +31,7 @@ ReactDOM.render(
 <AuthProvider>
 <BrowserRouter>
 <Switch>
+<Route path='/user-posts/:user' component={UserPosts} />
 <Route path='/' component={PostList} />
 </Switch>
 </BrowserRouter>

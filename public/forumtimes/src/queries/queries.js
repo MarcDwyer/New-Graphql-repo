@@ -69,4 +69,16 @@ mutation($id: ID!) {
 }
 `;
 
-export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost };
+const UserPostQuery = gql`
+query($id: ID!) {
+  userPost(id: $id) {
+    id
+    title
+    username
+    commentLength
+
+  }
+}
+`;
+
+export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost, UserPostQuery };
