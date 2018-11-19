@@ -8,7 +8,6 @@ import ViewPost from './viewpost';
 import { Link, Route } from 'react-router-dom';
 
 export const UserPosts = (props) => {
-
         return (
             <AuthContext.Consumer>
                 {(user) => {

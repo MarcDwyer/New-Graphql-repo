@@ -12,7 +12,6 @@ class Nav extends Component {
     }
   }
   render() {
-
   return (
   <AuthContext.Consumer>
     {(user) => (
@@ -34,7 +33,7 @@ isUser(user) {
       <Dropdown trigger={
           <Button className="signbut" style={this.styles.button}>Sign In</Button>
         }>
-        <NavItem href="http://localhost:5000/auth/google">Google+</NavItem>
+        <NavItem href="/auth/google">Google+</NavItem>
       </Dropdown>
 
     );
@@ -45,7 +44,7 @@ isUser(user) {
         <Button className="signbut" style={this.styles.button}>{user.username}</Button>
       }>
      <Link style={{color: '#26a69a'}} to={path}>Check Posts</Link>
-      <NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>
+      <NavItem href="/auth/logout">Sign Out</NavItem>
     </Dropdown>
   )
 }

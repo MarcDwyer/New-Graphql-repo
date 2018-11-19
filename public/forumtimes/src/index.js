@@ -19,6 +19,8 @@ const link = createHttpLink({
   uri: '/graph',
 });
 
+
+
 const client = new ApolloClient({
   cache,
   link: ApolloLink.from([
