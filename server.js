@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const passportSetup = require('./config/passport_setup');
+const bodyParser = require('body-parser');
 const schema = require('./schema/schema');
 const jwt = require('jsonwebtoken');
 const authRoutes = require('./routes/authroutes');
@@ -22,7 +23,7 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [process.env.SECRET]
 }))
-
+app.use(bodyParser.json({ extended: true}))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -56,9 +57,17 @@ app.use('/graph', cors(),
   }
 })))
 
-app.use('/authenticate', cors(), (req, res) => [
-  res.send('apple bottom jeans')
-])
+app.use('/authenticate', cors(), (req, res) => {
+  try {
+   // console.log(req.body.token)
+   console.log('weewee')
+    const isValid = jwt.verify(req.body.token, process.env.SECRET_KEY)
+    res.send(JSON.stringify(isValid))
+  } catch(err) {
+    console.log(err)
+    res.send(JSON.stringify(err))
+  }
+})
 
 mongoose.connection.once('open', () => {
   console.log('db connected');

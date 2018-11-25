@@ -13,7 +13,6 @@ const validationSchema  = Yup.object().shape({
 });
 
 const TheForm = (props) => {
-  console.log(props);
   return (
     <Mutation 
     mutation={addPost}
@@ -31,7 +30,7 @@ const TheForm = (props) => {
     onSubmit={(values, actions) => {  
       const newuser = props.user ? props.user.email : "Anonymous";
       const userName = props.user ? props.user.username : "Anonymous";
-      console.log(userName)
+
       addComment({
         variables: {
           title: values.title,

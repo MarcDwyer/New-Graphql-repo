@@ -28,7 +28,6 @@ class Nav extends Component {
   );
 }
 isUser(user) {
-
   if (!user) {
     return (
       <Dropdown trigger={
