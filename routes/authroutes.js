@@ -7,7 +7,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile']
+    scope: ['profile', 'email']
 }))
 
 router.get('/logout', (req, res) => {

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   username: String,
   googleId: String,
+  email: String,
   title: String,
   body: String,
   comments: Array,

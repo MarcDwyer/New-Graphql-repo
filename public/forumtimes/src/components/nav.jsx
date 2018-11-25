@@ -28,23 +28,27 @@ class Nav extends Component {
   );
 }
 isUser(user) {
+
   if (!user) {
     return (
       <Dropdown trigger={
           <Button className="signbut" style={this.styles.button}>Sign In</Button>
         }>
-        <NavItem href="/auth/google">Google+</NavItem>
+        <NavItem href="http://localhost:5000/auth/google">Google+</NavItem>
+        <li>
+        <Link to="/user-signup">Sign in</Link>
+        </li>
       </Dropdown>
 
     );
   }
-  const path = `/user-posts/${user.googleId}`;
+
   return (
     <Dropdown trigger={
         <Button className="signbut" style={this.styles.button}>{user.username}</Button>
       }>
-     <Link style={{color: '#26a69a'}} to={path}>Check Posts</Link>
-      <NavItem href="/auth/logout">Sign Out</NavItem>
+     <Link style={{color: '#26a69a'}} to='/user-posts'>Check Posts</Link>
+      <NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>
     </Dropdown>
   )
 }

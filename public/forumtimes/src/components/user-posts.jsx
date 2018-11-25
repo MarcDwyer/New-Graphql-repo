@@ -18,13 +18,9 @@ export const UserPosts = (props) => {
                             <h2>sign in please....</h2>
                             </div>
                         );
-                    } else if (user.googleId !== props.match.params.user) {
-                        return (
-                            <h2>Incorrect User</h2>
-                        );
                     }
                     return (
-                        <Query query={UserPostQuery} variables={{id: props.match.params.user}}>
+                        <Query query={UserPostQuery} variables={{email: user.email}}>
                         {({ loading, error, data }) => {
                             if (loading) return 'Loading...'
                           return (

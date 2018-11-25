@@ -22,8 +22,8 @@ const getPosts = gql`
 `;
 
 const addPost = gql`
-mutation($title: String!, $body: String!, $username: String, $googleId: ID, $date: String) {
-  addPost(title: $title, body: $body, username: $username, googleId: $googleId, date: $date) {
+mutation($title: String!, $body: String!, $email: String!, $username: String!, $date: String) {
+  addPost(title: $title, body: $body, email: $email, username: $username, date: $date) {
     id
     title
     username
@@ -70,8 +70,8 @@ mutation($id: ID!) {
 `;
 
 const UserPostQuery = gql`
-query($id: ID!) {
-  userPost(id: $id) {
+query($email: String!) {
+  userPost(email: $email) {
     id
     title
     username
@@ -81,4 +81,24 @@ query($id: ID!) {
 }
 `;
 
-export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost, UserPostQuery };
+const SignUp = gql`
+mutation($username: String!, $password: String!, $email: String!) {
+  signUp(username: $username, password: $password, email: $email) {
+    id
+    username
+    email
+  }
+}
+`;
+
+const SignIn = gql`
+query($email: String!, $password: String!) {
+  nonAuthUser(email: $email, password: $password) {
+    id
+    email
+    username
+    token
+  }
+}
+`;
+export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost, UserPostQuery, SignUp, SignIn };

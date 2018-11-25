@@ -11,6 +11,7 @@ import { CreatePost } from './createpost';
 
 
 export const PostList = (props) => {
+
   return(
   <Query query={getPosts}>
       {({ loading, error, data }) => {

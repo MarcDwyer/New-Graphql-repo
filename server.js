@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const passportSetup = require('./config/passport_setup');
 const schema = require('./schema/schema');
+const jwt = require('jsonwebtoken');
 const authRoutes = require('./routes/authroutes');
 const cors = require('cors');
 
