@@ -56,6 +56,9 @@ app.use('/graph', cors(),
   }
 })))
 
+app.use('/authenticate', cors(), (req, res) => [
+  res.send('apple bottom jeans')
+])
 
 mongoose.connection.once('open', () => {
   console.log('db connected');

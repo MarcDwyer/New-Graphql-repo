@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { UserPostQuery } from '../queries/queries';
 import {Collection, CollectionItem } from 'react-materialize';
@@ -7,7 +7,8 @@ import Nav from './nav';
 import ViewPost from './viewpost';
 import { Link, Route } from 'react-router-dom';
 
-export const UserPosts = (props) => {
+export default class UserPosts extends Component{
+    render() {
         return (
             <AuthContext.Consumer>
                 {(user) => {
@@ -26,12 +27,12 @@ export const UserPosts = (props) => {
                           return (
                               <React.Fragment>
                               <Nav />
-                              <Route path={`${props.match.url}/:id`} component={ViewPost} />
+                              <Route path={`${this.props.match.url}/:id`} component={ViewPost} />
                               <div className="contained">
                               <h4>Your Posts</h4>
                                 <Collection>
                                 {data.userPost.map(({ id, title, username, commentLength }) => {
-                                    const path = `${props.match.url}/${id}`;
+                                    const path = `${this.props.match.url}/${id}`;
                                       return (
                                          <Link to={path} key={id}>
                                         <CollectionItem>
@@ -53,5 +54,6 @@ export const UserPosts = (props) => {
                 }}
             </AuthContext.Consumer>
         );
-};
+}
+}
 

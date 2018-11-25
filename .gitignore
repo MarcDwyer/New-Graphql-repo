@@ -1,2 +1,6 @@
 .env.default
 .env
+
+node_modules
+
+public/forumtimes/node_modules
