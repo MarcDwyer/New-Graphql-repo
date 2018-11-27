@@ -38,12 +38,12 @@ export default class UserSignup extends Component {
                 this.setState({isValid: data});
             }}
             >
-            {(addComment, { data }) => (
+            {(signUp, { data }) => (
                 <Formik
                 initialValues={{username: '', password: '', email: ''}}
                 onSubmit={(values, action) => {
 
-                    addComment({
+                    signUp({
                         variables: 
                         {email: values.email,
                         username: values.username,
@@ -52,7 +52,6 @@ export default class UserSignup extends Component {
                 }}
                 validationSchema={validationSchema}
                 render={({ values, touched, errors }) => {
-                    
                     return (
                         <Form>
                         {this.handleSign()}
@@ -96,6 +95,9 @@ export default class UserSignup extends Component {
             <h5 style={{color: 'red'}}>Email is already being used...</h5>
           ) 
       } else if (isValid && isValid.signUp.id) {
+          setTimeout(() => {
+              this.props.history.push('/user-signin')
+          }, 1500);
           return (
             <h5>Success!</h5>
           );

@@ -5,12 +5,6 @@ import { fetchUser, LocalUser, ChangeUser } from '../queries/queries';
 export const AuthContext = React.createContext();
 
 class AuthProvider extends Component {
- constructor(props) {
-   super(props);
-   this.state = {
-    user: null
-   }
- }
   async componentDidMount() {
     const checker = JSON.parse(localStorage.getItem('token'));
     if (!checker) return;
@@ -49,22 +43,21 @@ class AuthProvider extends Component {
   }
 
 render() {
-     console.log(this.props)
-return (
-  <AuthContext.Provider value={this.props.user.getUser || this.props.theUser}>
-  {this.props.children}
-</AuthContext.Provider>
-);
+    return (
+        <AuthContext.Provider value={this.props.user.getUser || this.props.theUser}>
+            {this.props.children}
+        </AuthContext.Provider>
+    );
 }
 }
 
 export default compose(
-  withRouter, 
-  graphql(fetchUser, {name: "user"}),
-  graphql(LocalUser, {
-    props: ({ data: { theUser } }) => ({
-      theUser
-    })
-  }),
-  graphql(ChangeUser, {name: 'changeUser'})
+    withRouter,
+    graphql(fetchUser, {name: "user"}),
+    graphql(LocalUser, {
+        props: ({ data: { theUser } }) => ({
+            theUser
+        })
+    }),
+    graphql(ChangeUser, {name: 'changeUser'})
 )(AuthProvider);
