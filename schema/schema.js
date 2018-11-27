@@ -41,7 +41,8 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: {type: GraphQLID},
     username: {type: GraphQLString},
-    googleId: {type: GraphQLID}
+    googleId: {type: GraphQLID},
+    email: {type: GraphQLString}
   })
 });
 const NonAuthUserType = new GraphQLObjectType({

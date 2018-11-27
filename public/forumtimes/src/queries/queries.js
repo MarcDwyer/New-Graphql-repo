@@ -6,6 +6,7 @@ const fetchUser = gql`
     id
     username
     googleId
+    email
   }
 }
 `;

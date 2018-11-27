@@ -14,13 +14,6 @@ class AuthProvider extends Component {
   async componentDidMount() {
     const checker = JSON.parse(localStorage.getItem('token'));
     if (!checker) return;
-    this.props.changeUser({
-        variables: {
-            username: checker.username,
-            email: checker.email,
-            token: checker.token
-        }
-    })
     if (!this.props.theUser) return;
 
     const sendToken = await fetch('/authenticate', {
@@ -33,7 +26,8 @@ class AuthProvider extends Component {
       body: JSON.stringify(checker)
     });
     const isValid = await sendToken.json();
-    if (isValid.message && isValid.message.includes('expired')) {
+    console.log(isValid)
+    if (isValid.message) {
       localStorage.removeItem('token');
       this.props.changeUser({
         variables: {
@@ -43,16 +37,21 @@ class AuthProvider extends Component {
         }
       })
        this.props.history.push('/user-signin')
-    }
+        return;
+    }  this.props.changeUser({
+          variables: {
+              username: checker.username,
+              email: checker.email,
+              token: checker.token
+          }
+      })
+
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps !== this.props && this.props && this.props.user.getUser) {
-      this.setState({user: this.props.user.getUser})
-    }
-  }
+
 render() {
+     console.log(this.props)
 return (
-  <AuthContext.Provider value={this.state.user || this.props.theUser}>
+  <AuthContext.Provider value={this.props.user.getUser || this.props.theUser}>
   {this.props.children}
 </AuthContext.Provider>
 );
