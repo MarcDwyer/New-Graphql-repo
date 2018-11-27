@@ -20,7 +20,7 @@ class Nav extends Component {
       <div className="navbar-fixed">
         <nav className="fixer">
           <div className="nav-flex">
-          <Link to="/" className="brand-logo left">Forum App</Link>
+          <Link to="/" className="brand-logo left">Readitor</Link>
           {this.isUser(user)}
           </div>
         </nav>

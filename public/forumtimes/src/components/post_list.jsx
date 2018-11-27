@@ -23,7 +23,7 @@ export const PostList = (props) => {
               <Route path={`/posts/:id`} component={ViewPost} />
               <Route path='/create-post' component={CreatePost}/>
           <div className="contained">
-            <h3>Recent Posts</h3>
+            <h4>Recent Posts</h4>
             <Link className='waves-effect waves-light btn' to='/create-post'>Create Post</Link>
             <div className="comments">
             <Collection>

@@ -29,7 +29,7 @@ render() {
                 <div className="topmodal">
                   <div className="modaldiv">
                     <div className="modalcontent">
-                      <h4>Loading Post...</h4>
+                      <h4 style={{textAlign: 'center'}}>Loading Post...</h4>
                     </div>
                   </div>
                 </div>
