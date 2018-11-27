@@ -101,4 +101,20 @@ query($email: String!, $password: String!) {
   }
 }
 `;
-export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost, UserPostQuery, SignUp, SignIn };
+
+const LocalUser = gql`
+query {
+  theUser @client {
+        username
+        email
+        token
+}
+}
+`;
+
+const ChangeUser = gql`
+mutation updateUser($username: String!, $email: String!, $token: String!) {
+  updateUser(username: $username, email: $email, token: $token) @client 
+}
+`;
+export { getPosts, addPost, fetchUser, addComment, FullPost, RemovePost, UserPostQuery, SignUp, SignIn, LocalUser, ChangeUser };

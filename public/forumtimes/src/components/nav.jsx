@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavItem, Dropdown, Button } from 'react-materialize';
-import {AuthContext} from './authprovider';
+import { AuthContext } from './authprovider';
+import { compose, graphql } from 'react-apollo';
+import { ChangeUser} from "../queries/queries"
 import { Link } from 'react-router-dom';
 
 class Nav extends Component {
@@ -28,7 +30,7 @@ class Nav extends Component {
   );
 }
 isUser(user) {
-  if (!user) {
+  if (!user.username) {
     return (
       <Dropdown trigger={
           <Button className="signbut" style={this.styles.button}>Sign In</Button>
@@ -47,10 +49,29 @@ isUser(user) {
         <Button className="signbut" style={this.styles.button}>{user.username}</Button>
       }>
      <Link style={{color: '#26a69a'}} to='/user-posts'>Check Posts</Link>
-      <NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>
+        {this.signOut(user)}
     </Dropdown>
   )
 }
+signOut(user) {
+      if (user.googleId) {
+          return (<NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>)
+      } else {
+          return (
+              <NavItem onClick={() => {
+                  localStorage.removeItem('token')
+                  this.props.changeUser({variables: {
+                      username: null,
+                          email: null,
+                          token: null
+                      }})
+              }}>Sign Out</NavItem>
+          );
+      }
+
+}
 }
 
-export default Nav;
+export default compose(
+    graphql(ChangeUser, {name: 'changeUser'}),
+)(Nav)

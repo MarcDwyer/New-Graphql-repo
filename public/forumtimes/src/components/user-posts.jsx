@@ -8,9 +8,7 @@ import ViewPost from './viewpost';
 import { Link, Route } from 'react-router-dom';
 
 export default class UserPosts extends Component{
-    async componentDidMount() {
-
-    }
+  
     render() {
         return (
             <AuthContext.Consumer>

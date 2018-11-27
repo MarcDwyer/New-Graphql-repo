@@ -3,6 +3,8 @@ import { ApolloConsumer } from 'react-apollo'
 import { SignIn } from '../queries/queries';
 import { Button } from 'react-materialize'
 import { Form, Field, Formik } from 'formik'; 
+import { compose, graphql } from 'react-apollo'
+import { ChangeUser } from '../queries/queries'
 import * as Yup from 'yup'
 import Nav from './nav'
 
@@ -12,7 +14,9 @@ const validationSchema  = Yup.object().shape({
     password: Yup.string().required('Password is required').min(6)
   });
 
-export const UserSignin = (props) => {
+ const UserSignin = (props) => {
+
+    console.log(props)
    const styles = {
         loginparent: {position:'fixed', display: 'flex', width: '100%', height: '100%'},
         logindiv: {width: '750px', margin:'45px auto auto auto'},
@@ -38,9 +42,17 @@ export const UserSignin = (props) => {
                         action.setFieldError('password', 'Invalid password')
                         return;
                     }
-                    const stringed = JSON.stringify(data.nonAuthUser)
+                    const newData = data.nonAuthUser;
+                    const stringed = JSON.stringify(newData)
                    localStorage.setItem('token', stringed);
-                   props.history.push('/');
+                   props.changeUser({
+                      variables: {
+                       username: newData.username,
+                       email: newData.email,
+                       token: newData.token
+                      }
+                   }) 
+                   props.history.push('/')
                 }}
                 render={({ values, touched, errors }) => (
                     <Form>
@@ -66,3 +78,7 @@ export const UserSignin = (props) => {
             </div>
     );
 }
+
+export default compose(
+    graphql(ChangeUser, {name: 'changeUser'}),
+)(UserSignin)

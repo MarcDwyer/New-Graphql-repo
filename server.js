@@ -59,8 +59,6 @@ app.use('/graph', cors(),
 
 app.use('/authenticate', cors(), (req, res) => {
   try {
-   // console.log(req.body.token)
-   console.log('weewee')
     const isValid = jwt.verify(req.body.token, process.env.SECRET_KEY)
     res.send(JSON.stringify(isValid))
   } catch(err) {
