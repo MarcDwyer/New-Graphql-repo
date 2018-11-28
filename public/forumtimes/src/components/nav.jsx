@@ -35,7 +35,7 @@ isUser(user) {
       <Dropdown trigger={
           <Button className="signbut" style={this.styles.button}>Sign In</Button>
         }>
-        <NavItem href="http://localhost:5000/auth/google">Google+</NavItem>
+        <NavItem href="/auth/google">Google+</NavItem>
         <li>
         <Link to="/user-signup">Sign in</Link>
         </li>
@@ -55,7 +55,7 @@ isUser(user) {
 }
 signOut(user) {
       if (user.googleId) {
-          return (<NavItem href="http://localhost:5000/auth/logout">Sign Out</NavItem>)
+          return (<NavItem href="/auth/logout">Sign Out</NavItem>)
       } else {
           return (
               <NavItem onClick={() => {
