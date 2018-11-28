@@ -57,7 +57,9 @@ render() {
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {
                                 e.preventDefault();
-                                const newUser = user ? user.username : 'Anonymous';
+                                console.log(user)
+                                const newUser = !user.username ? 'Anonymous' : user.username;
+                                console.log(newUser)
                                 addComment({variables: {
                                   id,
                                   username: newUser,
