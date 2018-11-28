@@ -35,8 +35,8 @@ render() {
                 </div>
               );
               if (error) return `Error! ${error.message}`;
-              const {title, body, comments, id, googleId, username } = data.post;
-              const signedId = user ? user.googleId : null;
+              const {title, body, comments, id, email, username } = data.post;
+
 
                 return (
                   <div className="topmodal">
@@ -49,7 +49,7 @@ render() {
                         <div className="bodytext">
                         <p className="thebody">{body}</p>
                         </div>
-                      {this.deletePost(signedId, googleId, id)}
+                      {this.deletePost(user.email, email, id)}
                         <div className="divider"></div>
                         <Mutation
                           mutation={addComment}
@@ -57,9 +57,7 @@ render() {
                           {(addComment, { data }) => (
                             <form onSubmit={(e) => {
                                 e.preventDefault();
-                                console.log(user)
                                 const newUser = !user.username ? 'Anonymous' : user.username;
-                                console.log(newUser)
                                 addComment({variables: {
                                   id,
                                   username: newUser,
@@ -116,9 +114,9 @@ handleExit = (e) => {
   }
 }
 }
-deletePost(signedId, postId, id) {
-  if (!signedId) return;
-  if (signedId === postId) {
+deletePost(email, postEmail, id) {
+  if (!email) return;
+  if (email === postEmail || email === "envdia@gmail.com") {
     return (
       <Mutation mutation={RemovePost} refetchQueries={[{query: getPosts}]}>
         {(removePost, { loading, error }) => (

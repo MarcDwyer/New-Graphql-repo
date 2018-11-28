@@ -40,7 +40,7 @@ const FullPost = gql`
       title
       body
       username
-      googleId
+      email
       comments {
         username
         comment

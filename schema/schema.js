@@ -18,7 +18,7 @@ const PostType = new GraphQLObjectType({
     body: {type: GraphQLString},
     comments: {type: new GraphQLList(CommentType)},
     date: {type: GraphQLString},
-    googleId: {type: GraphQLID},
+    email: {type: GraphQLString},
     commentLength: {
       type: GraphQLString,
        async resolve(parent, args) {
@@ -62,9 +62,9 @@ const RootQuery = new GraphQLObjectType({
     post: {
       type: PostType,
       args: {id: {type: GraphQLID}},
-      resolve(parent, args) {
+     async resolve(parent, args) {
 
-        const bottle = Post.findById(args.id);
+        const bottle = await Post.findById(args.id);
         return bottle;
       }
     },
