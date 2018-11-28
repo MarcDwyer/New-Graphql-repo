@@ -27,9 +27,9 @@ const TheForm = (props) => {
       {(addComment, { data }) => (
     <Formik
     initialValues={{title: '', body: ''}}
-    onSubmit={(values, actions) => {  
-      const newuser = props.user ? props.user.email : "Anonymous";
-      const userName = props.user ? props.user.username : "Anonymous";
+    onSubmit={(values, actions) => {
+      const newuser = !props.user.email ? "Anonymous" : props.user.email;
+      const userName = props.user.username ? props.user.username : "Anonymous";
 
       addComment({
         variables: {

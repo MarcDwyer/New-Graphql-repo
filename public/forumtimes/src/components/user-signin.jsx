@@ -16,7 +16,6 @@ const validationSchema  = Yup.object().shape({
 
  const UserSignin = (props) => {
 
-    console.log(props)
    const styles = {
         loginparent: {position:'fixed', display: 'flex', width: '100%', height: '100%'},
         logindiv: {width: '750px', margin:'45px auto auto auto'},
