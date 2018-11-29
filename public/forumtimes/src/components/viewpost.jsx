@@ -118,7 +118,20 @@ deletePost(email, postEmail, id) {
   if (!email) return;
   if (email === postEmail || email === "envdia@gmail.com") {
     return (
-      <Mutation mutation={RemovePost} refetchQueries={[{query: getPosts}]}>
+      <Mutation
+          mutation={RemovePost}
+            update={(cache, {data: RemovePost}) => {
+            const { id } = RemovePost.removePost;
+              const { posts } = cache.readQuery({ query: getPosts });
+              console.log(posts);
+              const ind = posts.findIndex(post => post.id === id);
+              posts.splice(ind, 1);
+              cache.writeQuery({
+                  query: getPosts,
+                  data: { posts }
+              });
+          }}
+      >
         {(removePost, { loading, error }) => (
           <span
             className="delete"

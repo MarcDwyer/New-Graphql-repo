@@ -65,7 +65,7 @@ const addComment = gql`
 const RemovePost = gql`
 mutation($id: ID!) {
   removePost(id: $id){
-    title
+    id
   }
 }
 `;

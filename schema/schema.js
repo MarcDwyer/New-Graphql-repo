@@ -72,6 +72,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(PostType),
     async resolve() {
         const data = await Post.find({}).sort({date: -1});
+
         return data;
 
       }
@@ -157,6 +158,7 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
       const data = await Post.remove({_id: ObjectId(args.id)});
+      return {id: args.id};
       }
     },
     signUp: {
